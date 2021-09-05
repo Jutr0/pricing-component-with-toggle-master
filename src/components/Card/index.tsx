@@ -1,12 +1,12 @@
 
 import './style.scss'
 
-const Card = ({ title, header, options, button, main }: IProps) => {
+const Card = ({ title, header, options, button, main, isSwitchChecked }: IProps) => {
     return (
         <div className={`cardContainer ${ main ? "mainCard" : "" }`}>
             <header> <h4>{title}</h4> </header>
-            <div className="price">{header.monthly}</div>
-            {options.map((option, index) => (
+            <div className="price">{isSwitchChecked ? header.monthly : header.annually}</div>
+            {options.map((option) => (
                 <div className="option" key={option}> {option} </div>
             ))}
             <button>{button}</button>
@@ -25,4 +25,5 @@ type IProps = {
     options: string[];
     button: string;
     main: boolean;
+    isSwitchChecked: boolean;
 }

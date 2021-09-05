@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Switcher from './components/Switcher';
 
@@ -10,16 +10,25 @@ import './mainStyle.scss';
 import Card from './components/Card';
 
 function App() {
+
+  const [isSwitchChecked, setIsSwitchChecked] = useState<boolean>(true)
+
+  const handleSwitch = (isChecked: boolean) => {
+
+    setIsSwitchChecked(isChecked)
+
+  }
+
   return (
     <div className="app">
       <img src={bgBottom} alt="Background Bottom" className="bgBottom" />
       <img src={bgTop} alt="Background Bottom" className="bgTop" />
       <main className="container">
         <header className="mainHeader"><h1>Our Pricing</h1></header>
-        <Switcher checkedOption="Monthly" uncheckedOption="Annually" />
+        <Switcher checkedOption="Monthly" uncheckedOption="Annually" handleSwitch={(isChecked: boolean) => handleSwitch(isChecked)} />
         <div className="cardsContainer">
-          {CARDS.map((cardInfo, index) => (
-            <Card {...cardInfo} key={cardInfo.title} />
+          {CARDS.map((cardInfo) => (
+            <Card {...cardInfo} key={cardInfo.title} isSwitchChecked={isSwitchChecked} />
           ))}
         </div>
       </main>
